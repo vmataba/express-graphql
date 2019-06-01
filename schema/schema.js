@@ -7,7 +7,7 @@ for (let index = 1; index <= 10; index++) {
   books.push({
     id: index,
     title: `Book ${index}`,
-    counts: parseInt(index + Math.random() * 100),
+    count: parseInt(index + Math.random() * 100),
     category: "Science",
     authorId: index
   });
@@ -23,14 +23,26 @@ for (let index = 1; index <= 10; index++) {
   });
 }
 
-const { GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLSchema } = graphQl;
+const {
+  GraphQLObjectType,
+  GraphQLInt,
+  GraphQLString,
+  GraphQLSchema,
+  GraphQLList
+} = graphQl;
 
 const Author = new GraphQLObjectType({
   name: "Author",
   fields: () => ({
     id: { type: GraphQLInt },
     firstName: { type: GraphQLString },
-    lastName: { type: GraphQLString }
+    lastName: { type: GraphQLString },
+    books: {
+      type: new GraphQLList(BookType),
+      resolve: (parent, args) => {
+        return _.filter(books, { authorId: parent.id });
+      }
+    }
   })
 });
 
@@ -39,11 +51,11 @@ const BookType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     title: { type: GraphQLString },
-    counts: { type: GraphQLInt },
+    count: { type: GraphQLInt },
     category: { type: GraphQLString },
     author: {
       type: Author,
-      resolve:(source, args) => {
+      resolve: (source, args) => {
         return _.find(authors, { id: source.authorId });
       }
     }
