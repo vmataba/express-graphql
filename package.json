@@ -1,0 +1,26 @@
+{
+  "name": "express-graphql-learning",
+  "version": "1.0.0",
+  "description": "for learning graphql in express-js framework",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vmataba/express-graphql-learning.git"
+  },
+  "author": "Victor Mataba <vmataba0@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vmataba/express-graphql-learning/issues"
+  },
+  "homepage": "https://github.com/vmataba/express-graphql-learning#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-graphql": "^0.8.0",
+    "graphql": "^14.3.1",
+    "lodash": "^4.17.11",
+    "nodemon": "^1.19.1"
+  }
+}
